@@ -10,6 +10,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 /* 레포지토리 테스트 코드
 * 테스트 함수 하나가 끝나면 데이터를 클리어 해주어야 함
+* TDD(테스트 주도 개발) : 테스트 코드를 작성하고 구현체를 작성하는 개발 방식 (이 프로젝트는 구현체 작성 후 테스트 코드 작성)
 * */
 public class MemoryMemberRepositoryTest {
     MemoryMemberRepository repository = new MemoryMemberRepository();
