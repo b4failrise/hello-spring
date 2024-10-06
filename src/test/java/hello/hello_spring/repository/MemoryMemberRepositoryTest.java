@@ -1,8 +1,10 @@
 package hello.hello_spring.repository;
 
 import hello.hello_spring.domain.Member;
-import org.junit.jupiter.api.Assertions;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.*;
 
 public class MemoryMemberRepositoryTest {
     MemberRepository repository = new MemoryMemberRepository();
@@ -20,6 +22,7 @@ public class MemoryMemberRepositoryTest {
         * 사용하는 목적 : assert는 release configuration 에선 컴파일 되지 않는다
         * => debug 모드에서만 동작하고, relase 모드에서는 동작하지 않기 때문에 프로그램을 중지시킬 일도 없다.
         * */
-        Assertions.assertEquals(member, result);    // 아무런 출력도 하지 않음. param(1): 비교하려는 입력값, param(2): 기대하는 결과
+//        Assertions.assertEquals(member, result);    // 아무런 출력도 하지 않음. param(1): 비교하려는 입력값, param(2): 기대하는 결과
+        assertThat(member).isEqualTo(result);    // assertj
     }
 }
