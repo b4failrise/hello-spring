@@ -4,6 +4,7 @@ import hello.hello_spring.domain.Member;
 import hello.hello_spring.repository.MemoryMemberRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
@@ -12,8 +13,21 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 // Test 클래스 생성 단축키 : 테스트를 하려는 클래스에서 ctrl+shift+T
 class MemberServiceTest {
-    MemberService memberService = new MemberService();
-    MemoryMemberRepository memberRepository = new MemoryMemberRepository();
+    MemberService memberService;
+    MemoryMemberRepository memberRepository;
+    // Service 안에서 생성한 레포지토리와 Test 클래스에서 생성한 레포지토리는 다른 인스턴스임
+    // store 저장소를 static으로 생성했기 때문에 인스턴스와 상관없이 클래스 레벨에서 동작됨. 크게 문제는 안 되지만 다른 레포지토리를 사용하고 있는 상황
+    // 외부에서 넣어주도록(DI) 수정 -> 동일한 레포지토리를 사용
+    @BeforeEach
+    public void beforeEach(){
+        memberRepository = new MemoryMemberRepository();
+        memberService = new MemberService(memberRepository);
+    }
+    @AfterEach
+    public void afterEach(){
+        memberRepository.clearStore();
+    }
+
     @Test
     void join() {
         // given
